@@ -489,7 +489,7 @@ Jake VanCampen (vancampe@ohsu.edu) from Lucia Carbone (carbone@ohsu.edu) lab per
 Filtered alignment blocks can be found [here](Hoolock_leuconedys_Assembly/HLE-HG38-Synteny-2022JAN10-FMPPJ3.xlsx).
 
 Dot Plot:
-![HLE - HG38 Dotplot](Hoolock_leuconedys_Assembly/HLE_FMPP.hg38.net.filt.maf.png)
+![HLE - HG38 Dotplot](https://github.com/gabriellehartley/HLE_Assembly/blob/a54201f7e12998d385779fbe64bb248df801b188/HLE_FMPP.hg38.net.filt.maf.png)
 
 #### a.) Correction of Chromosome Segment Inversions with JBAT
 
