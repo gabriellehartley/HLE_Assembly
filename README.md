@@ -14,7 +14,7 @@ Assembled raw ONT fastq reads to generate fasta formatted assembly. ONT reads we
 
 ```
 module load flye/2.9
-flye --nano-hq /core/projects/EBP/Oneill/reads/nanopore/promethion/gibbon/Combined_Reads_Super_Accurate/HLE_Super_Accurate_ONT_combined.fastq \
+flye --nano-hq HLE_Super_Accurate_ONT_combined.fastq \
         --genome-size 2.8g \
         --out-dir HLE_Flye_2021DEC08 \
         --asm-coverage 30 \
@@ -52,8 +52,8 @@ Polished assembly using long ONT read data basecalled with SUP algorithm.
 ```
 module load medaka/1.4.3
 
-medaka_consensus -b 100 -i /core/projects/EBP/Oneill/reads/nanopore/promethion/gibbon/Combined_Reads_Super_Accurate/HLE_Super_Accurate_ONT_combined.fastq \
-     -d /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Flye_2021DEC08/assembly.fasta \
+medaka_consensus -b 100 -i HLE_Super_Accurate_ONT_combined.fastq \
+     -d /HLE_Flye_2021DEC08/assembly.fasta \
      -o MEDAKA_HLE_2021DEC09 \
      -t 12 \ 
      -m r941_prom_sup_g507 
@@ -92,7 +92,7 @@ Polished assembly using Illumina ChIP Input, WGS075, and WGS076 sequencing runs 
 ```
 module load bwa/0.7.17
 
-bwa index -p  HLE_Medaka_2021DEC10 /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Medaka_2021DEC09/MEDAKA_HLE_2021DEC09/consensus.fasta
+bwa index -p  HLE_Medaka_2021DEC10 /MEDAKA_HLE_2021DEC09/consensus.fasta
 ```
 
 ##### ii.) Map and Process ChIP Input, WGS075, and WGS76 Samples Using BWA 
@@ -100,19 +100,19 @@ bwa index -p  HLE_Medaka_2021DEC10 /core/projects/EBP/Oneill/Gibbon_Working/HLE_
 ```
 module load bwa/0.7.17
 
-bwa mem -t 16 HLE_Medaka_2021DEC10 /core/labs/Oneill/ghartley/Reads/GibbonChIPSeqReads/Betty-input-R1-combined.fq /core/labs/Oneill/ghartley/Reads/GibbonChIPSeqReads/Betty-input-R1-combined.fq > BettyinputChIPReads_vs_HLE_Medaka_2021DEC10_bwa.sam
+bwa mem -t 16 HLE_Medaka_2021DEC10 /GibbonChIPSeqReads/Betty-input-R1-combined.fq /GibbonChIPSeqReads/Betty-input-R1-combined.fq > BettyinputChIPReads_vs_HLE_Medaka_2021DEC10_bwa.sam
 ```
 
 ```
 module load bwa/0.7.17
 
-bwa mem -t 16 HLE_Medaka_2021DEC10 /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW075_R1.fastq.gz /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS075Reads_vs_HLE_Medaka_2021DEC10_bwa.sam
+bwa mem -t 16 HLE_Medaka_2021DEC10 /WGS-HLE/BETTY/Betty-HLE-SW075_R1.fastq.gz/WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS075Reads_vs_HLE_Medaka_2021DEC10_bwa.sam
 ```
 
 ```
 module load bwa/0.7.17
 
-bwa mem -t 16 HLE_Medaka_2021DEC10 /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW076_R1.fastq.gz /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS076Reads_vs_HLE_Medaka_2021DEC10_bwa.sam
+bwa mem -t 16 HLE_Medaka_2021DEC10 /WGS-HLE/BETTY/Betty-HLE-SW076_R1.fastq.gz /WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS076Reads_vs_HLE_Medaka_2021DEC10_bwa.sam
 ```
 
 ##### iii.) Convert SAM to BAM
@@ -201,7 +201,7 @@ The assembly was split into smaller fragments broken at fasta record boundaries 
 ```
 module load GenomeBrowser/20180626
 
-faSplit sequence /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Medaka_2021DEC09/MEDAKA_HLE_2021DEC09/consensus.fasta 100 consensus_split_
+faSplit sequence /MEDAKA_HLE_2021DEC09/consensus.fasta 100 consensus_split_
 ```
 
 #### c.) Polish Assembly Fragments Using Pilon
@@ -211,7 +211,7 @@ Note: This step was run on multiple assembly fragments generated in step 3b subs
 module load java
 module load pilon/1.22
 
-java -Xmx200g -jar /isg/shared/apps/pilon/1.22/pilon-1.22.jar --genome consensus_split_000.fa 
+java -Xmx200g -jar /pilon/1.22/pilon-1.22.jar --genome consensus_split_000.fa 
     --frags BettyinputChIPReads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam \
     --frags BettyWGS075Reads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam \
     --frags BettyWGS076Reads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam \
@@ -254,7 +254,8 @@ module load samtools/1.7
 
 minimap2 -ax map-ont \
     -t 8 \
-    /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Pilon_2021DEC09/Combined/HLE_Pilon_Assembly.fasta /core/projects/EBP/Oneill/reads/nanopore/promethion/gibbon/Combined_Reads_Super_Accurate/HLE_Super_Accurate_ONT_combined.fasta | samtools sort -o HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam -T HLE_allreads_combined.tmp
+    /HLE_Pilon_2021DEC09/Combined/HLE_Pilon_Assembly.fasta \
+    HLE_Super_Accurate_ONT_combined.fasta | samtools sort -o HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam -T HLE_allreads_combined.tmp
 ```
 #### b.) Generate a Coverage Histogram with Purge Haplotigs
 ```
@@ -264,8 +265,8 @@ module load samtools/1.7
 module load bedtools/2.29.0
 
 purge_haplotigs readhist \
-    -b /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_PurgeHaplotigs_2021DEC11/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam \
-    -g /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Pilon_2021DEC09/Combined/HLE_Pilon_Assembly.fasta \
+    -b  /HLE_PurgeHaplotigs_2021DEC11/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam \
+    -g  /HLE_Pilon_2021DEC09/Combined/HLE_Pilon_Assembly.fasta \
     -t 16
 ```
 
@@ -280,7 +281,7 @@ module load samtools/1.7
 module load bedtools/2.29.0
 
 purge_haplotigs contigcov \
-    -i /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_PurgeHaplotigs_2021DEC11/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam.gencov \
+    -i /HLE_PurgeHaplotigs_2021DEC11/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam.gencov \
     -l 10 -m 50 -h 55
 ```
 #### d.) Run the Purging Pipeline Using Purge Haplotigs
@@ -290,9 +291,9 @@ module load R/3.5.1
 module load samtools/1.7
 module load bedtools/2.29.0
 
-purge_haplotigs purge -g /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Pilon_2021DEC09/Combined/HLE_Pilon_Assembly.fasta \
--c /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_PurgeHaplotigs_2021DEC11/coverage_stats.csv \
--b /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_PurgeHaplotigs_2021DEC11/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam
+purge_haplotigs purge -g /HLE_Pilon_2021DEC09/Combined/HLE_Pilon_Assembly.fasta \
+-c /HLE_PurgeHaplotigs_2021DEC11/coverage_stats.csv \
+-b /HLE_PurgeHaplotigs_2021DEC11/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam
 ```
 
 | BUSCO v. 5.0.0   | eukaryota_odb10 (n=255) | mammalia_odb10 (n=9226)  | primates_odb10 (n=13780)  |
