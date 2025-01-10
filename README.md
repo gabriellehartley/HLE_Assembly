@@ -486,7 +486,7 @@ seqtk seq -L 3000 HLE_FMPP_3kbmin.wrapped.FINAL.fasta > HLE_FMPPJ3_3KBLimit.fast
 
 Jake VanCampen (vancampe@ohsu.edu) from Lucia Carbone (carbone@ohsu.edu) lab performed alignment of hg38 and HLE assembly. 
 
-Filtered alignment blocks can be found [here](Hoolock_leuconedys_Assembly/HLE-HG38-Synteny-2022JAN10-FMPPJ3.xlsx).
+Filtered alignment blocks can be found [here](https://github.com/gabriellehartley/HLE_Assembly/blob/b64ca31432b216684a9d89ec4d2d7c0a34d2cd51/HLE-HG38-Synteny-2022JAN10-FMPPJ3.xlsx).
 
 Dot Plot:
 ![HLE - HG38 Dotplot](https://github.com/gabriellehartley/HLE_Assembly/blob/a54201f7e12998d385779fbe64bb248df801b188/HLE_FMPP.hg38.net.filt.maf.png)
@@ -499,7 +499,7 @@ Based on the alignment and syntenic blocks reported in Capozzi et. al (2012), th
 | ---             | ---             | ---     | ---              | ---                    | ---                                       |
 | HiC_Scaffold_1  | 1               | 9p      | 1                | add to 9q              | none                                      |
 | HiC_Scaffold_10 | 6-16-5-17-4     | 8       | 4-17-5-16-6      | reverse                | none                                      |
-| HiC_Scaffold_11 | 14-20-2-17      | 14      | 20-2-17-14       | reverse 20-17, reverse | reversed 20-17, should now be 14-17-2-20 [video here](Hoolock_leuconedys_Assembly/Chr14_Scaffold11_ManualReview.mov)  |
+| HiC_Scaffold_11 | 14-20-2-17      | 14      | 20-2-17-14       | reverse 20-17, reverse | reversed 20-17, should now be 14-17-2-20   |
 | HiC_Scaffold_12 | X               | X       | X                | none                   | none                                      |
 | HiC_Scaffold_13 | 12-19-1         | 15      | 1-19-12          | reverse                | none                                      |
 | HiC_Scaffold_14 | 1-19-12-19      | 18      | 1-19-12-19       | none                   | none                                      |
@@ -510,13 +510,13 @@ Based on the alignment and syntenic blocks reported in Capozzi et. al (2012), th
 | HiC_Scaffold_19 | 17-2-10-1       | 16      | 17-2-1           | none (10 has low score)| none                                      |
 | HiC_Scaffold_2  | 11-8-3-12       | 9q      | 12-3-8-11        | reverse, add to 9p     | none                                      |
 | HiC_Scaffold_20 | 11-5-11         | 12      | 5-8-11           | remove 11              | moved small 11 segment to debris, should now be 11-5
-| HiC_Scaffold_3  |14-10-1-15-22-16-5-17-14|13|1-14-17-5-16-22-15| reverse 1-14, reverse 15-14  (10 has low score)  | reversed 1-14, 15-14; removed debris at end, should now be 1-10-14-14-17-5-16-22-15 [video here](Hoolock_leuconedys_Assembly/Chr13_Scaffold3_ManualReview.mov) |
+| HiC_Scaffold_3  |14-10-1-15-22-16-5-17-14|13|1-14-17-5-16-22-15| reverse 1-14, reverse 15-14  (10 has low score)  | reversed 1-14, 15-14; removed debris at end, should now be 1-10-14-14-17-5-16-22-15  |
 | HiC_Scaffold_4  | 15-7-2          | 7       | 15-7-2           | none                   | none                                      |
 | HiC_Scaffold_5  | 22-15-7-11-3-8  | 11      | 22-15-7-11-3-8   | none                   | none                                      |
 | HiC_Scaffold_6  | 16-5-16-5-16    | 10      | 5-16-5-16        | none                   | none                                      |
 | HiC_Scaffold_7  | 3-12-19-3-11    | 6       | 3-12-19-11       | none                   | none                                      |
 | HiC_Scaffold_8  | 10-4            | 5       | 4-10             | reverse                | none                                      |
-| HiC_Scaffold_9  | 12-2-7-12-6     | 4       | 7-2-12-6         | reverse 12-7               | reversed 12-7, should now be 7-2-12-12-6 [video here](Hoolock_leuconedys_Assembly/Chr4_Scaffold9_ManualReview.mov)                          |
+| HiC_Scaffold_9  | 12-2-7-12-6     | 4       | 7-2-12-6         | reverse 12-7               | reversed 12-7, should now be 7-2-12-12-6                      |
 
 3D-DNA was used to generate a fasta with the corrected inversions.
 
