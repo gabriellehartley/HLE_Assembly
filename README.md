@@ -405,9 +405,9 @@ date
 The assembly was reviewed manually in JBAT and errors were corrected. One contig was inverted and contigs were joined as scaffolds.
 
 Pre-Correction:
-![Pre-Correction](Hoolock_leuconedys_Assembly/HLE_Assembly_PRE-REVIEW.HiCImage.svg)
+![Pre-Correction]([Hoolock_leuconedys_Assembly/HLE_Assembly_PRE-REVIEW.HiCImage.svg](https://github.com/gabriellehartley/HLE_Assembly/blob/59234f4f797354edc9680dad3c66da9a0cbe2066/HLE_Assembly_PRE-REVIEW.HiCImage.svg))
 Post-Correction:
-![Post-Correction](Hoolock_leuconedys_Assembly/HLE_Assembly_POST-REVIEW.HiCImage.svg)
+![Post-Correction]([Hoolock_leuconedys_Assembly/HLE_Assembly_POST-REVIEW.HiCImage.svg](https://github.com/gabriellehartley/HLE_Assembly/blob/59234f4f797354edc9680dad3c66da9a0cbe2066/HLE_Assembly_POST-REVIEW.HiCImage.svg))
 
 ##### e.) Scaffolding with 3D-DNA (Post-JBAT Review)
 
