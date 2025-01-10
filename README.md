@@ -370,9 +370,9 @@ A Juicer directory (```Juicer_HLE_2021DEC13```) was set up with the following fo
 module load java-sdk/1.8.0_92
 module load bwa/0.7.5a
 
-bash /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Scaffolding_2021DEC13/Juicer_HLE_2021DEC13/scripts/juicer.sh \
-    -D /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Scaffolding_2021DEC13/Juicer_HLE_2021DEC13/ \
-    -z /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Scaffolding_2021DEC13/Juicer_HLE_2021DEC13/references/HLE_FMPP_3kbmin.fasta \
+bash /Juicer_HLE_2021DEC13/scripts/juicer.sh \
+    -D /Juicer_HLE_2021DEC13/ \
+    -z /Juicer_HLE_2021DEC13/references/HLE_FMPP_3kbmin.fasta \
     -s none \
     -p ./HLE_FMPP_3kbmin.fasta.genome
 ```
@@ -392,11 +392,11 @@ hostname
 echo "\nStart time:"
 date
 
-export TMPDIR="/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3"
-export TMP_DIR="/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3"
-export _JAVA_OPTIONS=-Djava.io.tmpdir=/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3
+export TMPDIR="/hic_temp3"
+export TMP_DIR="/hic_temp3"
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/hic_temp3
 
-bash ../3d-dna-master/run-asm-pipeline.sh ./HLE_FMPP_3kbmin.wrapped.fasta /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Scaffolding_2021DEC13/Juicer_HLE_2021DEC13/aligned/merged_nodups.txt
+bash ../3d-dna-master/run-asm-pipeline.sh ./HLE_FMPP_3kbmin.wrapped.fasta /Juicer_HLE_2021DEC13/aligned/merged_nodups.txt
 
 echo "\nEnd time:"
 date
@@ -419,11 +419,11 @@ hostname
 echo "\nStart time:"
 date
 
-export TMPDIR="/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3"
-export TMP_DIR="/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3"
-export _JAVA_OPTIONS=-Djava.io.tmpdir=/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3
+export TMPDIR="/hic_temp3"
+export TMP_DIR="/hic_temp3"
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/hic_temp3
 
-bash ../3d-dna-master/run-asm-pipeline-post-review.sh -r HLE_FMPP_3kbmin.wrapped.FINAL.review.assembly HLE_FMPP_3kbmin.wrapped.fasta /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Scaffolding_2021DEC13/Juicer_HLE_2021DEC13/aligned/merged_nodups.txt
+bash ../3d-dna-master/run-asm-pipeline-post-review.sh -r HLE_FMPP_3kbmin.wrapped.FINAL.review.assembly HLE_FMPP_3kbmin.wrapped.fasta /Juicer_HLE_2021DEC13/aligned/merged_nodups.txt
 
 echo "\nEnd time:"
 date
@@ -528,11 +528,11 @@ hostname
 echo "\nStart time:"
 date
 
-export TMPDIR="/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3"
-export TMP_DIR="/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3"
-export _JAVA_OPTIONS=-Djava.io.tmpdir=/core/projects/EBP/Oneill/Gibbon_Working/hic_temp3
+export TMPDIR="/hic_temp3"
+export TMP_DIR="/hic_temp3"
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/hic_temp3
 
-bash ../3d-dna-master/run-asm-pipeline-post-review.sh -r HLE_FMPP_3kbmin.wrapped.manualreview.FINAL.review.assembly HLE_FMPP_3kbmin.wrapped.FINAL_Step2.fasta /core/projects/EBP/Oneill/Gibbon_Working/HLE_Assembly/HLE_Scaffolding_2021DEC13/Juicer_HLE_2021DEC13/aligned/merged_nodups.txt
+bash ../3d-dna-master/run-asm-pipeline-post-review.sh -r HLE_FMPP_3kbmin.wrapped.manualreview.FINAL.review.assembly HLE_FMPP_3kbmin.wrapped.FINAL_Step2.fasta /Juicer_HLE_2021DEC13/aligned/merged_nodups.txt
 
 echo "\nEnd time:"
 date
@@ -634,7 +634,7 @@ Gaps were filled using TGS-GapCloser. Must use script that Patrick Grady (patric
 ```
 tgsgapcloser --scaff ./HLE_FMPPJ3M_3kblimit.fasta \
         --tgstype pb \
-        --reads /core/projects/EBP/Oneill/reads/nanopore/promethion/gibbon/Combined_Reads_Super_Accurate/HLE_Super_Accurate_ONT_combined.fasta \
+        --reads HLE_Super_Accurate_ONT_combined.fasta \
         --output HLE_FMPPJ3M_3kblimit_TGS-GapCloser \
         --ne \
 	--minmap-arg \'--score-N 3\' \
@@ -682,19 +682,19 @@ bwa index -p  HLE_TGS_2022JAN14 ./HLE_FMPPJ3MT_3kblimit.fasta
 ```
 module load bwa/0.7.17
 
-bwa mem -t 16 HLE_Medaka_2021DEC10 /core/labs/Oneill/ghartley/Reads/GibbonChIPSeqReads/Betty-input-R1-combined.fq /core/labs/Oneill/ghartley/Reads/GibbonChIPSeqReads/Betty-input-R1-combined.fq > BettyinputChIPReads_vs_HLE_FMPPJ3MT_2022JAN14_bwa.sam
+bwa mem -t 16 HLE_Medaka_2021DEC10 Betty-input-R1-combined.fq Betty-input-R1-combined.fq > BettyinputChIPReads_vs_HLE_FMPPJ3MT_2022JAN14_bwa.sam
 ```
 
 ```
 module load bwa/0.7.17
 
-bwa mem -t 16 HLE_Medaka_2021DEC10 /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW075_R1.fastq.gz /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS075Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa.sam
+bwa mem -t 16 HLE_Medaka_2021DEC10 /WGS-HLE/BETTY/Betty-HLE-SW075_R1.fastq.gz /WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS075Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa.sam
 ```
 
 ```
 module load bwa/0.7.17
 
-bwa mem -t 16 HLE_Medaka_2021DEC10 /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW076_R1.fastq.gz /core/labs/Oneill/ghartley/Reads/WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS076Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa.sam
+bwa mem -t 16 HLE_Medaka_2021DEC10 /WGS-HLE/BETTY/Betty-HLE-SW076_R1.fastq.gz /WGS-HLE/BETTY/Betty-HLE-SW075_R2.fastq.gz > BettyWGS076Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa.sam
 ```
 
 ##### iii.) Convert SAM to BAM
@@ -792,7 +792,7 @@ Note: This step was run on multiple assembly fragments generated in step 3b subs
 module load java
 module load pilon/1.22
 
-java -Xmx200g -jar /isg/shared/apps/pilon/1.22/pilon-1.22.jar --genome consensus_split_000.fa 
+java -Xmx200g -jar /pilon/1.22/pilon-1.22.jar --genome consensus_split_000.fa 
     --frags BettyinputChIPReads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam \
     --frags BettyWGS075Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam \
     --frags BettyWGS076Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam \
@@ -833,7 +833,7 @@ To reduce Ns, gaps filling was repeated with TGS-GapCloser. Must use script that
 ```
 tgsgapcloser --scaff ./HLE_FMPPJ3MTP.fasta \
         --tgstype pb \
-        --reads /core/projects/EBP/Oneill/reads/nanopore/promethion/gibbon/Combined_Reads_Super_Accurate/HLE_Super_Accurate_ONT_combined.fasta \
+        --reads HLE_Super_Accurate_ONT_combined.fasta \
         --output HLE_FMPPJ3M_3kblimit_TGS-GapCloser \
         --ne \
 	--minmap-arg \'--score-N 3\' \
@@ -954,7 +954,7 @@ Note: This step was run on multiple assembly fragments generated in step 3b subs
 module load java
 module load pilon/1.22
 
-java -Xmx200g -jar /isg/shared/apps/pilon/1.22/pilon-1.22.jar --genome consensus_split_000.fa 
+java -Xmx200g -jar /pilon/1.22/pilon-1.22.jar --genome consensus_split_000.fa 
     --frags BettyPCRFree_v_HLE_FMPPJ3MTP_Chrs_R.bam \
     --threads 24 --output polishedfrag_0 
 ```
