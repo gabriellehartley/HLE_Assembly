@@ -269,7 +269,7 @@ purge_haplotigs readhist \
     -t 16
 ```
 
-![Coverage Map](/Hoolock_leuconedys_Assembly/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam.histogram.png)
+![Coverage Map](https://github.com/gabriellehartley/HLE_Assembly/blob/323d264bc455a67cc6165bb682903b2582f56840/HLECombinedONTReads_vs_HLE_Genome_Pilon_2021DEC11.sorted.bam.histogram.png)
 
 #### c.) Set Cutoffs with Purge Haplotigs Following Manual Review of Peaks
 Based on the above coverage plot, the following were chosen: ```-l 10 -m 50 -h 55```.
