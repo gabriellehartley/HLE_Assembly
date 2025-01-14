@@ -985,3 +985,19 @@ cat polishedfrag_*fa > HLE_Ragtag_Patch.FINAL.fasta
 | Total length (>= 10000 bp)  |    2760609521 |
 | Total length (>= 25000 bp)  |    2760609521 |
 | Total length (>= 50000 bp)  |    2760609521 |
+
+| BBmap/39.08  stats.sh       |    Stats      |
+| ---                         | ---           |
+| Main genome scaffolds       | 19            |
+| Main genome conigs          | 77            |
+| Main genome scaffold N50    | 159.997 MB    |
+| Main genome scaffold L50    | 8             |
+| Main genome contig N50      | 79.153 MB     |
+| Main genome contig L50      | 13            |
+| Main genome scaffold N90    | 115.685 MB    |
+| Main genome scaffold L90    | 13            |
+| Main genome contig N90      | 49.437 MB     |
+| Main genome contig L90      | 25            |
+| % of genome in scaffolds    | 100%          |
+
+
