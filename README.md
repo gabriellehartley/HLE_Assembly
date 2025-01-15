@@ -10,10 +10,11 @@
 ## **HLE Assembly Steps**
 
 ### 1. Flye Assembly from Raw ONT Reads
-Assembled raw ONT fastq reads to generate fasta formatted assembly. ONT reads were basecalled with the SUP algorithm using Guppy v5.0.16-GPU and Flye was subsequently run with the ```--nano-hq``` flag for SUP reads.
+Assembled raw ONT fastq reads to generate fasta formatted assembly. ONT reads were basecalled with the SUP algorithm using Guppy v5.0.16-GPU (quality >10) and Flye was subsequently run with the ```--nano-hq``` flag for SUP reads.
 
 ```
 module load flye/2.9
+
 flye --nano-hq HLE_Super_Accurate_ONT_combined.fastq \
         --genome-size 2.8g \
         --out-dir HLE_Flye_2021DEC08 \
@@ -47,7 +48,7 @@ flye --nano-hq HLE_Super_Accurate_ONT_combined.fastq \
 | Total length (>= 50000 bp)  |    2788686322 |
 
 ### 2. Long Read Polishing using Medaka
-Polished assembly using long ONT read data basecalled with SUP algorithm. 
+Polished assembly using above described ONT reads.
 
 ```
 module load medaka/1.4.3
@@ -177,16 +178,19 @@ samtools index BettyWGS076Reads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyinputChIPReads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam > BettyinputChIPReads_vs_HLE_Medaka_2021DEC10_bwa_STATS.txt
 ```
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyWGS075Reads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam > BettyWGS075Reads_vs_HLE_Medaka_2021DEC10_bwa_STATS.txt
 ```
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyWGS076Reads_vs_HLE_Medaka_2021DEC10_bwa_sorted.bam > BettyWGS076Reads_vs_HLE_Medaka_2021DEC10_bwa_STATS.txt
 ```
 
@@ -351,7 +355,7 @@ seqtk seq -L 3000 curated.fasta > HLE_FMPP_3kbmin.fasta
 | Total length (>= 50000 bp)  |    2758982978 |
 
 ### 6. Scaffold Assembly with Juicer, 3D-DNA, and JBAT
-Dovetail Omni-C was performed using a Betty LCL cell pellet. A small, 1-2 million read library was first generated and processed according to Dovetail's QC pipeline to ensure library quality, then sequenced to a depth of 300 million reads.
+Dovetail Omni-C was performed using a Betty LCL cell pellet. A small, 1-2 million PE read library was first generated and processed according to Dovetail's QC pipeline to ensure library quality, then sequenced to a depth of 300 million PE reads.
 
 ##### a.) Create a .genome file
 A ```.genome``` file was created of contig sizes. This is needed as an input for Juicer.
@@ -364,7 +368,7 @@ cut -f1,2 HLE_FMPP_3kbmin.fasta.fai > HLE_FMPP_3kbmin.fasta.genome
 ```
 
 ##### b.) Pre-Process Omni-C Reads with Juicer
-A Juicer directory (```Juicer_HLE_2021DEC13```) was set up with the following folders: ```fastq```, ```references```, ```scripts```. The assembly (```HLE_FMPP_3kbmin.fasta```) was placed in ```references```. The Omni-C reads (```Gabby-HLE-OmniC_S1_L002_R1_001.fastq.gz``` and ```Gabby-HLE-OmniC_S1_L002_R2_001.fastq.gz```) were placed in ```fastq```. Updated Juicer scripts to work with the SLURM Xanadu cluster were placed in the ```scripts``` folder, see [here](/Juicer_Scripts/) for folder contents. In order to run Juicer, the following code was run. Once all of the split fastq files populated in the ```splits``` folder, the run was terminated. The same code was submitted again, which runs the alignment process. This is due to an unknown bug that prevents the Juicer scripts from progressing from the splits to alignment phase. Only the ```merged_nodups.txt``` file is needed to proceed with scaffolding.
+A Juicer directory (```Juicer_HLE_2021DEC13```) was set up with the following folders: ```fastq```, ```references```, ```scripts```. The assembly (```HLE_FMPP_3kbmin.fasta```) was placed in ```references```. The Omni-C reads (```Gabby-HLE-OmniC_S1_L002_R1_001.fastq.gz``` and ```Gabby-HLE-OmniC_S1_L002_R2_001.fastq.gz```) were placed in ```fastq```. Updated Juicer scripts to work with the SLURM Xanadu cluster were placed in the ```scripts``` folder. In order to run Juicer, the following code was run. Once all of the split fastq files populated in the ```splits``` folder, the run was terminated. The same code was submitted again, which runs the alignment process. This is due to an unknown bug that prevents the Juicer scripts from progressing from the splits to alignment phase. Only the ```merged_nodups.txt``` file is needed to proceed with scaffolding.
 
 ```
 module load java-sdk/1.8.0_92
@@ -759,16 +763,19 @@ samtools index BettyWGS076Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyinputChIPReads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam > BettyinputChIPReads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_STATS.txt
 ```
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyWGS075Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam > BettyWGS075Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_STATS.txt
 ```
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyWGS076Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_sorted.bam > BettyWGS076Reads_vs_HLE_FMPPJ3MT_2022JAN14_bwa_STATS.txt
 ```
 
@@ -931,6 +938,7 @@ samtools index BettyPCRFree_v_HLE_FMPPJ3MTP_Chrs_R.bam
 
 ```
 module load samtools/1.7
+
 samtools flagstat BettyPCRFree_v_HLE_FMPPJ3MTP_Chrs_R.bam > BettyPCRFree_v_HLE_FMPPJ3MTP_Chrs_R_STATS.txt
 ```
 
